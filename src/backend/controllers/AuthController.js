@@ -43,7 +43,10 @@ export const signupHandler = function (schema, request) {
       bookmarks: [],
     };
     const createdUser = schema.users.create(newUser);
-    const encodedToken = sign({ _id, username }, "dsdsdmnmnaksjkqiiian");
+    const encodedToken = sign(
+      { _id, username },
+      import.meta.env.VITE_JWT_SECRET
+    );
     return new Response(201, {}, { createdUser, encodedToken });
   } catch (error) {
     return new Response(
@@ -80,7 +83,7 @@ export const loginHandler = function (schema, request) {
     if (password === foundUser.password) {
       const encodedToken = sign(
         { _id: foundUser._id, username },
-        "dsdsdmnmnaksjkqiiian"
+        import.meta.env.VITE_JWT_SECRET
       );
       console.log(foundUser);
       console.log(encodedToken);
