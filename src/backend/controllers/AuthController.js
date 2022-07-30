@@ -85,8 +85,6 @@ export const loginHandler = function (schema, request) {
         { _id: foundUser._id, username },
         import.meta.env.VITE_JWT_SECRET
       );
-      console.log(foundUser);
-      console.log(encodedToken);
       return new Response(200, {}, { foundUser, encodedToken });
     }
     return new Response(
